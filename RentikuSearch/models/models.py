@@ -1,5 +1,5 @@
-from sqlalchemy import String, Text, Float, ForeignKey
-from sqlalchemy.orm import DeclarativeBase, mapped_column, Mapped
+from sqlalchemy import Float, ForeignKey, String, Text
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 
 class Base(DeclarativeBase):
@@ -9,9 +9,9 @@ class Base(DeclarativeBase):
 class User(Base):
     __tablename__ = "users"
     id: Mapped[int] = mapped_column(primary_key=True)
-    username: Mapped[str] = mapped_column(String(50),
-                                          nullable=False,
-                                          unique=True)
+    username: Mapped[str] = mapped_column(
+        String(50), nullable=False, unique=True
+    )
     email: Mapped[str] = mapped_column(String(255), unique=True)
     password_hash: Mapped[str] = mapped_column(String(255), nullable=False)
 
