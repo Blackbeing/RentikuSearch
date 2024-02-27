@@ -1,0 +1,4 @@
+.venv/
+*.py[co]
+*.sw[po]
+__pycache__/
