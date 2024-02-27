@@ -1,3 +1,4 @@
+import os
 import unittest
 from unittest.mock import MagicMock
 
@@ -10,9 +11,7 @@ from RentikuSearch.models.models import Base, Property, User
 class TestDatabase(unittest.TestCase):
 
     def setUp(self):
-        self.db = Database(
-            "postgresql+psycopg2://rsuser_test:password@db:5432/rentikusearchdb_test"
-        )
+        self.db = Database(os.getenv("SQLALCHEMY_DATABASE_URL"))
         self.db.conn = MagicMock()
 
     def test_connect(self):
@@ -28,9 +27,7 @@ class TestDatabase(unittest.TestCase):
 class TestModels(unittest.TestCase):
 
     def setUp(self):
-        self.db = Database(
-            "postgresql+psycopg2://rsuser_test:password@db:5432/rentikusearchdb_test"
-        )
+        self.db = Database(os.getenv("SQLALCHEMY_DATABASE_URL"))
         self.db.connect()
         Base.metadata.drop_all(self.db.engine)
         Base.metadata.create_all(self.db.engine)
