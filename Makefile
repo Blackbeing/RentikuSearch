@@ -7,7 +7,7 @@ help:  ## Print this help.
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST) | sort
 
 .PHONY: all
-all: lint checks
+all: lint checks tests
 
 .PHONY: lint
 lint: lint-black lint-isort lint-flake  ## Run linting tools on the code.
@@ -31,3 +31,6 @@ checks: check-types
 check-types: ## Check types
 	python -m mypy $(PY_SRC)
 
+.PHONY: tests
+tests:
+	python -m unittest discover .
