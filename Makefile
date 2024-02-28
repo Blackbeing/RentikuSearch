@@ -22,7 +22,7 @@ lint-isort:  ## Sort the imports using isort.
 
 .PHONY: lint-flake
 lint-flake:
-	python -m  autoflake -ir --exclude tests/fixtures --remove-all-unused-imports $(PY_SRC)
+	python -m  autoflake -ir --exclude tests/fixtures --remove-all-unused-imports --ignore-init-module-imports $(PY_SRC)
 
 .PHONY: checks
 checks: check-types
