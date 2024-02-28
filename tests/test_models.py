@@ -2,40 +2,35 @@ import os
 import unittest
 from unittest.mock import MagicMock
 
-from sqlalchemy.orm import sessionmaker
-
+from RentikuSearch.models.base_model import Base
 from RentikuSearch.models.database import Database
-from RentikuSearch.models.models import Base, Property, User
+from RentikuSearch.models.models import Property, User
 
 
 class TestDatabase(unittest.TestCase):
 
     def setUp(self):
-        self.db = Database(os.getenv("SQLALCHEMY_DATABASE_URL"))
-        self.db.conn = MagicMock()
+        self.db_url = os.getenv("SQLALCHEMY_DATABASE_URL")
+        self.db = Database(self.db_url)
 
-    def test_connect(self):
-        self.db.connect()
-        self.assertIsNotNone(self.db.conn)
-        self.assertIsNotNone(self.db.engine)
+    def test_init(self):
+        self.assertEqual(self.db.db_url, self.db_url)
 
     def test_disconnect(self):
+        self.db.session = MagicMock()
         self.db.disconnect()
-        self.db.conn.close.assert_called_once()
+        self.db.session.remove.assert_called_once()
 
 
 class TestModels(unittest.TestCase):
 
     def setUp(self):
         self.db = Database(os.getenv("SQLALCHEMY_DATABASE_URL"))
-        self.db.connect()
         Base.metadata.drop_all(self.db.engine)
-        Base.metadata.create_all(self.db.engine)
-        Session = sessionmaker(bind=self.db.engine)
-        self.session = Session()
+        self.db.reload()
 
     def tearDown(self):
-        self.session.close()
+        self.db.session.close()
 
     def test_user_model(self):
         user = User(
@@ -43,11 +38,13 @@ class TestModels(unittest.TestCase):
             email="test@example.com",
             password_hash="password123",
         )
-        self.session.add(user)
-        self.session.commit()
+        self.db.new(user)
+        self.db.save()
 
         result = (
-            self.session.query(User).filter_by(username="test_user").first()
+            self.db.session.query(User)
+            .filter_by(username="test_user")
+            .first()
         )
         self.assertEqual(result.email, "test@example.com")
 
@@ -57,8 +54,8 @@ class TestModels(unittest.TestCase):
             email="test@example.com",
             password_hash="password123",
         )
-        self.session.add(user)
-        self.session.commit()
+        self.db.new(user)
+        self.db.save()
 
         property = Property(
             title="Test Property",
@@ -77,13 +74,13 @@ class TestModels(unittest.TestCase):
             price=150000.0,
             owner_id=user.id,
         )
-        self.session.add(property)
-        self.session.add(property2)
+        self.db.new(property)
+        self.db.new(property2)
 
-        self.session.commit()
+        self.db.save()
 
         result = (
-            self.session.query(Property)
+            self.db.session.query(Property)
             .filter_by(title="Test Property")
             .first()
         )
@@ -91,7 +88,9 @@ class TestModels(unittest.TestCase):
         self.assertEqual(result.price, 100000.0)
         self.assertEqual(result.owner_id, user.id)
 
-        result = self.session.query(Property).filter_by(type="Rental").first()
+        result = (
+            self.db.session.query(Property).filter_by(type="Rental").first()
+        )
         self.assertEqual(result.title, "Test Property 2")
         self.assertEqual(result.price, 150000.0)
         self.assertEqual(result.owner_id, user.id)
