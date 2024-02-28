@@ -1,12 +1,10 @@
 from sqlalchemy import Float, ForeignKey, String, Text
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column
+
+from RentikuSearch.models.base_model import Base, BaseModel
 
 
-class Base(DeclarativeBase):
-    pass
-
-
-class User(Base):
+class User(Base, BaseModel):
     __tablename__ = "users"
     id: Mapped[int] = mapped_column(primary_key=True)
     username: Mapped[str] = mapped_column(
@@ -15,8 +13,11 @@ class User(Base):
     email: Mapped[str] = mapped_column(String(255), unique=True)
     password_hash: Mapped[str] = mapped_column(String(255), nullable=False)
 
+    def __repr__(self):
+        return "username: {}  email: {}".format(self.username, self.email)
 
-class Property(Base):
+
+class Property(Base, BaseModel):
     __tablename__ = "properties"
     id: Mapped[int] = mapped_column(primary_key=True)
     title: Mapped[str] = mapped_column(String(50))
