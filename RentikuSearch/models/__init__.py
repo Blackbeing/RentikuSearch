@@ -4,9 +4,8 @@ from config import get_config
 from RentikuSearch.models import database
 
 config = get_config()
-os.environ["SQLALCHEMY_DATABASE_URL"] = config.__dict__[
-    "SQLALCHEMY_DATABASE_URL"
-]
+database_url = config.DATABASE_URL
 
-storage = database.Database(os.environ["SQLALCHEMY_DATABASE_URL"])
+os.environ["DATABASE_URL"] = database_url
+storage = database.Database(database_url)
 storage.reload()

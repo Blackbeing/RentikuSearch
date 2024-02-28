@@ -10,19 +10,19 @@ basedir = Path(__file__).parent
 class BaseConfig:
     DEBUG = False
     TESTING = False
-    SECRET_KEY = os.environ.get("RENTIKUSEARCH_SK")
-    SQLALCHEMY_DATABASE_URI = os.environ.get("RENTIKUSEARCH_DB_URL")
+    SECRET_KEY = os.getenv("RENTIKUSEARCH_SK")
+    DATABASE_URL = os.getenv("RENTIKUSEARCH_DB_URL")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
 class TestingConfig(BaseConfig):
     TESTING = True
-    SQLALCHEMY_DATABASE_URL = "postgresql+psycopg2://rsuser_test:password@db:5432/rentikusearchdb_test"
+    DATABASE_URL = os.getenv("RENTIKUSEARCH_DB_URL_TEST")
 
 
 class DevelopmentConfig(BaseConfig):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URL = "postgresql+psycopg2://rsuser_dev:password@db:5432/rentikusearchdb_dev"
+    DATABASE_URL = os.getenv("RENTIKUSEARCH_DB_URL_DEV")
 
 
 def get_config(env_str="development"):
