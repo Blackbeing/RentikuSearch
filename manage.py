@@ -1,11 +1,17 @@
-from flask.cli import FlaskGroup
+import os
+
+from dotenv import load_dotenv
 
 from config import get_config
-from RentikuSearch.web_flask import create_app
+from RentikuSearch.api.v1.app import create_app
 
-app = create_app(get_config())
 
-cli = FlaskGroup(app)
+def main():
+    load_dotenv()
+    flask_env = os.getenv("FLASK_ENV")
+    app = create_app(get_config(flask_env))
+    app.run()
+
 
 if __name__ == "__main__":
-    cli()
+    main()
