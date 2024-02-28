@@ -10,7 +10,7 @@ from RentikuSearch.models.models import Property, User
 class TestDatabase(unittest.TestCase):
 
     def setUp(self):
-        self.db_url = os.getenv("SQLALCHEMY_DATABASE_URL")
+        self.db_url = os.getenv("DATABASE_URL")
         self.db = Database(self.db_url)
 
     def test_init(self):
@@ -25,7 +25,7 @@ class TestDatabase(unittest.TestCase):
 class TestModels(unittest.TestCase):
 
     def setUp(self):
-        self.db = Database(os.getenv("SQLALCHEMY_DATABASE_URL"))
+        self.db = Database(os.getenv("DATABASE_URL"))
         Base.metadata.drop_all(self.db.engine)
         self.db.reload()
 
