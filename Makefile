@@ -33,4 +33,4 @@ check-types: ## Check types
 
 .PHONY: tests
 tests:
-	python -m unittest discover .
+	python -m pytest tests
