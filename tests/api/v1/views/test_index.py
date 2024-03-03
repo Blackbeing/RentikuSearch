@@ -8,7 +8,7 @@ class TestStatusEndpoint(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.app = create_app(get_config("testing")).test_client()
+        cls.app = create_app(get_config()).test_client()
 
     def test_status_endpoint(self):
         response = self.app.get("/api/v1/status")
