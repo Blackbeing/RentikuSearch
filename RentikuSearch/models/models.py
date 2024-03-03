@@ -4,7 +4,7 @@ from sqlalchemy.orm import Mapped, mapped_column
 from RentikuSearch.models.base_model import Base, BaseModel
 
 
-class User(Base, BaseModel):
+class User(BaseModel, Base):
     __tablename__ = "users"
     id: Mapped[int] = mapped_column(primary_key=True)
     username: Mapped[str] = mapped_column(
@@ -17,7 +17,7 @@ class User(Base, BaseModel):
         return "username: {}  email: {}".format(self.username, self.email)
 
 
-class Property(Base, BaseModel):
+class Property(BaseModel, Base):
     __tablename__ = "properties"
     id: Mapped[int] = mapped_column(primary_key=True)
     title: Mapped[str] = mapped_column(String(50))

@@ -25,10 +25,10 @@ class DevelopmentConfig(BaseConfig):
     DATABASE_URL = os.getenv("RENTIKUSEARCH_DB_URL_DEV")
 
 
-def get_config(env_str="development"):
+def get_config():
     config_dict = {
         "production": BaseConfig,
         "development": DevelopmentConfig,
         "testing": TestingConfig,
     }
-    return config_dict.get(env_str)
+    return config_dict.get(os.getenv("FLASK_ENV"), DevelopmentConfig)
