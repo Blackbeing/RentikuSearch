@@ -2,6 +2,7 @@ from flask import Flask
 
 from config import BaseConfig
 from RentikuSearch.api.v1.views import bp
+from RentikuSearch.models import storage
 
 
 def create_app(config_class=BaseConfig):
@@ -21,6 +22,10 @@ def create_app(config_class=BaseConfig):
     @app.route("/test/")
     def test_page():
         return "<h1>Flask Factory Pattern</h1>"
+
+    @app.teardown_request
+    def close_session(req):
+        storage.disconnect()
 
     return app
 
