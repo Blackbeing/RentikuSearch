@@ -51,4 +51,4 @@ class Database:
         return self.__session.query(klass).all()
 
     def get(self, klass, id):
-        return self.__session.get(klass, id)
+        return self.__session.query(klass).filter(klass.id == id).first()
