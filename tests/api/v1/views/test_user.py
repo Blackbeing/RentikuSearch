@@ -26,8 +26,7 @@ class TestUserEndpoint(unittest.TestCase):
         self.assertIsNotNone(response.json)
 
     def test_get_user_by_id(self):
-        params = {"id": "1"}
-        response = self.app.get("/api/v1/user", query_string=params)
+        response = self.app.get("/api/v1/user/1")
         self.assertEqual(response.status_code, 200)
         self.assertIsNotNone(response.json)
 
