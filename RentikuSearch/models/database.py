@@ -46,3 +46,9 @@ class Database:
     def delete(self, obj=None):
         if obj:
             self.__session.remove(obj)
+
+    def all(self, klass):
+        return self.__session.query(klass).all()
+
+    def get(self, klass, id):
+        return self.__session.get(klass, id)

@@ -8,6 +8,8 @@ from RentikuSearch.models.models import Property, User
 
 storage.reload()
 
+MODELS_DICT = {"property": Property, "user": User}
+
 base_parser = cmd2.Cmd2ArgumentParser(description="RentikuSearch CLI")
 base_subparsers = base_parser.add_subparsers(
     title="subcommands", help="subcommands help"
@@ -42,6 +44,15 @@ create_property_parser.add_argument(
 create_property_parser.add_argument(
     "-u", "--owner-id", type=int, help="Property owner"
 )
+show_parser = base_subparsers.add_parser("show", help="Show objects")
+show_subparsers = show_parser.add_subparsers(
+    title="subcommands", help="subcommands help"
+)
+show_user_parser = show_subparsers.add_parser("user", help="Show Users")
+show_user_parser.add_argument(
+    "-a", "--all", action="store_true", help="Show all users"
+)
+show_user_parser.add_argument("-i", "--id", help="Show user by id")
 
 
 class RentikuSearchCMD(cmd2.Cmd):
@@ -97,8 +108,25 @@ class RentikuSearchCMD(cmd2.Cmd):
 
     create_property_parser.set_defaults(func=create_property)
 
+    def show_user(self, arg):
+        if arg.all:
+            print(storage.all(User))
+
+        elif arg.id:
+            print(storage.get(User, arg.id))
+
+    show_user_parser.set_defaults(func=show_user)
+
     @cmd2.with_argparser(create_parser)
     def do_create(self, args):
+        func = getattr(args, "func", None)
+        if func is not None:
+            func(self, args)
+        else:
+            self.do_help("base")
+
+    @cmd2.with_argparser(show_parser)
+    def do_show(self, args):
         func = getattr(args, "func", None)
         if func is not None:
             func(self, args)
