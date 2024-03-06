@@ -54,10 +54,6 @@ show_user_parser.add_argument(
 )
 show_user_parser.add_argument("-i", "--id", help="Show user by id")
 
-show_parser = base_subparsers.add_parser("show", help="Show objects")
-show_subparsers = show_parser.add_subparsers(
-    title="subcommands", help="subcommands help"
-)
 show_property_parser = show_subparsers.add_parser(
     "property", help="Show property"
 )
