@@ -1,15 +1,15 @@
 import unittest
 
-from config import get_config
-from RentikuSearch.api.v1.app import create_app
+from fastapi.testclient import TestClient
+
+from RentikuSearch.api.v1.app import app
 
 
 class TestUserEndpoint(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.ap = create_app(get_config())
-        cls.app = cls.ap.test_client()
+        cls.app = TestClient(app)
 
     def test_create_user(self):
         data = {

@@ -1,8 +1,8 @@
 from sqlalchemy import Float, ForeignKey, String, Text
 from sqlalchemy.orm import Mapped, mapped_column
 
-from RentikuSearch.models.database import Base
 from RentikuSearch.models.base_model import BaseModel
+from RentikuSearch.models.database import Base
 
 
 class User(BaseModel, Base):

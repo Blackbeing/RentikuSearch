@@ -1,9 +1,10 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import scoped_session, sessionmaker, declarative_base
+from sqlalchemy.orm import declarative_base, scoped_session, sessionmaker
 
 from config import get_config
 
 Base = declarative_base()
+
 
 class Database:
     __engine = None
@@ -29,8 +30,9 @@ class Database:
 
     def reload(self):
         Base.metadata.create_all(self.__engine)
-        session_factory = sessionmaker(bind=self.__engine,
-                                       expire_on_commit=False)
+        session_factory = sessionmaker(
+            bind=self.__engine, expire_on_commit=False
+        )
         Session = scoped_session(session_factory)
         self.__session = Session
 
@@ -59,4 +61,5 @@ class Database:
     def drop_db(self):
         Base.metadata.drop_all(self.__engine)
 
-
+    def session(self):
+        return self.__session
