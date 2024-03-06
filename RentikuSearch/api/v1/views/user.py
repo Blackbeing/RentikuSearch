@@ -12,7 +12,7 @@ async def create_user(request: Request):
     if data:
         user = User(**data)
         user.save()
-    return user.to_dict()
+        return user.to_dict()
 
 
 @router.get("/user", status_code=200)

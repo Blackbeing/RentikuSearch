@@ -1,9 +1,9 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import scoped_session, sessionmaker
+from sqlalchemy.orm import scoped_session, sessionmaker, declarative_base
 
 from config import get_config
-from RentikuSearch.models.base_model import Base
 
+Base = declarative_base()
 
 class Database:
     __engine = None
@@ -21,13 +21,16 @@ class Database:
         self.__engine = create_engine(self.db_url)
 
         if self.config.TESTING:
-            Base.metadata.drop_all(self.__engine)
+            self.init_db()
+
+    def init_db(self):
+        Base.metadata.drop_all(self.__engine)
+        Base.metadata.create_all(self.__engine)
 
     def reload(self):
         Base.metadata.create_all(self.__engine)
-        session_factory = sessionmaker(
-            bind=self.__engine, expire_on_commit=False
-        )
+        session_factory = sessionmaker(bind=self.__engine,
+                                       expire_on_commit=False)
         Session = scoped_session(session_factory)
         self.__session = Session
 
@@ -52,3 +55,8 @@ class Database:
 
     def get(self, klass, id):
         return self.__session.query(klass).filter(klass.id == id).first()
+
+    def drop_db(self):
+        Base.metadata.drop_all(self.__engine)
+
+
