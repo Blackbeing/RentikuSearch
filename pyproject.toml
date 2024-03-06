@@ -1,0 +1,38 @@
+[project]
+name = "RentikuSearch"
+dynamic = ["version"]
+description = "Default template for PDM package"
+authors = [
+    {name = "Blackbeing", email = "johnjahi55@gmail.com"},
+]
+dependencies = [
+    "cmd2>=2.4.3",
+    "fastapi[all]>=0.110.0",
+    "Jinja2>=3.1.3",
+    "psycopg2-binary>=2.9.9",
+    "python-dotenv>=1.0.1",
+    "requests>=2.31.0",
+    "SQLAlchemy>=2.0.28",
+]
+requires-python = "==3.10.*"
+readme = "README.md"
+license = {text = "MIT"}
+version = "0.1.0"
+
+[tool.pdm]
+distribution = false
+version = {source = "scm"}
+plugins = [
+  "pdm-multirun"
+]
+
+[tool.pdm.dev-dependencies]
+dev = [
+  "alembic>=1.13.1",
+  "autoflake>=2.3.0",
+  "black>=24.2.0",
+  "isort>=5.13.2",
+  "mypy>=1.8.0",
+  "pytest>=8.0.2",
+]
+
