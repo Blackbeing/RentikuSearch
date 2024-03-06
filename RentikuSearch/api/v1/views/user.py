@@ -1,25 +1,25 @@
-from flask import jsonify, make_response, request
+from fastapi import APIRouter, Request
 
-from RentikuSearch.api.v1.views import bp
 from RentikuSearch.models import storage
 from RentikuSearch.models.models import User
 
-
-@bp.route("/user/<id>", methods=["GET"], strict_slashes=False)
-def get_user_by_id(id):
-    return_val = storage.get(User, id).to_dict()
-    return make_response(jsonify(return_val), 200)
+router = APIRouter(prefix="/api/v1")
 
 
-@bp.route("/user", methods=["GET", "POST"], strict_slashes=False)
+@router.post("/user", status_code=201)
+async def create_user(request: Request):
+    data = await request.json()
+    if data:
+        user = User(**data)
+        user.save()
+    return user.to_dict()
+
+
+@router.get("/user", status_code=200)
 def users():
-    if request.method == "POST":
-        data = request.get_json()
-        if data:
-            user = User(**data)
-            user.save()
-        return make_response(jsonify(user.to_dict()), 201)
+    return [user.to_dict() for user in storage.all(User)]
 
-    elif request.method == "GET":
-        return_val = [user.to_dict() for user in storage.all(User)]
-        return make_response(jsonify(return_val), 200)
+
+@router.get("/user/{id}", status_code=200)
+def get_user_by_id(id: int):
+    return storage.get(User, id).to_dict()

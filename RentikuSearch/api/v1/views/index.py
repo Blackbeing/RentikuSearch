@@ -1,8 +1,8 @@
-from flask import jsonify
+from fastapi import APIRouter
 
-from RentikuSearch.api.v1.views import bp
+router = APIRouter(prefix="/api/v1")
 
 
-@bp.route("/status", strict_slashes=False)
-def setatus():
-    return jsonify({"status": "Alive"})
+@router.get("/status")
+def get_status():
+    return {"status": "Alive"}
