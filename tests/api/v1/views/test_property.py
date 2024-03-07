@@ -22,9 +22,9 @@ class TestPropertyEndpoint(unittest.TestCase):
         response = self.app.post("/api/v1/user", json=data)
         data = {
             "title": "TestProperty",
-            "type": "Rental",
+            "action": "rent",
             "description": "A well spaced rental home",
-            "location": "2929293232",
+            "latitude": "2929293232",
             "price": 23323,
             "owner_id": response.json().get("id"),
         }
