@@ -14,11 +14,11 @@ lint: lint-black lint-isort lint-flake  ## Run linting tools on the code.
 
 .PHONY: lint-black
 lint-black:  ## Lint the code using black.
-	python -m black --line-length=78 $(PY_SRC) .
+	python -m black --line-length=78 $(PY_SRC)
 
 .PHONY: lint-isort
 lint-isort:  ## Sort the imports using isort.
-	python -m isort --line-length=78 $(PY_SRC) .
+	python -m isort --line-length=78 $(PY_SRC)
 
 .PHONY: lint-flake
 lint-flake:
@@ -29,7 +29,7 @@ checks: check-types
 
 .PHONY: check-types
 check-types: ## Check types
-	python -m mypy $(PY_SRC)
+	python -m mypy $(PY_SRC) --exclude .venv
 
 .PHONY: tests
 tests:
