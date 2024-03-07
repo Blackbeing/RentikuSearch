@@ -1,13 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
-    <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
-  </head>
-  <body>
-   <h1>This is an example page</h1>
-  
-  </body>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rentiku Search</title>
+  <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <h1>Rentiku Search</h1>
+        <p>Find your dream property with ease.</p>
+      </div>
+      <div class="navbar-links">
+        <a href="#">Home</a>
+        <a href="#">Properties</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="search-box">
+        <input type="text" placeholder="Search...">
+        <button class="search-button">Search</button>
+      </div>
+    </nav>
+  </header>
+  <div class="property-section">
+    <div class="property-gallery">
+      <div class="property-item">
+        <img src="property1.jpg" alt="Property 1">
+        <h3>Modern Apartment</h3>
+        <p>$500,000</p>
+      </div>
+      <div class="property-item">
+        <img src="property2.jpg" alt="Property 2">
+        <h3>Spacious Villa</h3>
+        <p>$1,200,000</p>
+      </div>
+      <div class="property-item">
+        <img src="property1.jpg" alt="Property 1">
+        <h3>Modern Apartment</h3>
+        <p>$500,000</p>
+      </div>
+      <div class="property-item">
+        <img src="property1.jpg" alt="Property 1">
+        <h3>Modern Apartment</h3>
+        <p>$500,000</p>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2024 Rentiku Search. All rights reserved.</p>
+    </footer>
+</body>
+
 </html>
