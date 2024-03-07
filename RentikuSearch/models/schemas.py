@@ -4,9 +4,15 @@ from pydantic import BaseModel
 class PropertyBase(BaseModel):
     title: str
     description: str
-    type: str
-    location: str
+    action: str
     price: float
+    rent: float
+    num_rooms: int
+    address: str
+    latitude: str
+    longitude: str
+    region: str
+    image_url: str
 
 
 class propertyCreate(PropertyBase):
