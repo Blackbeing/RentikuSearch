@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rentiku Search</title>
   <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
+  <script src="{{ url_for('static', path='scripts/index.js') }}" defer=""></script>
 </head>
 
 <body>
@@ -28,32 +29,13 @@
     </nav>
   </header>
   <div class="property-section">
-    <div class="property-gallery">
-      <div class="property-item">
-        <img src="property1.jpg" alt="Property 1">
-        <h3>Modern Apartment</h3>
-        <p>$500,000</p>
-      </div>
-      <div class="property-item">
-        <img src="property2.jpg" alt="Property 2">
-        <h3>Spacious Villa</h3>
-        <p>$1,200,000</p>
-      </div>
-      <div class="property-item">
-        <img src="property1.jpg" alt="Property 1">
-        <h3>Modern Apartment</h3>
-        <p>$500,000</p>
-      </div>
-      <div class="property-item">
-        <img src="property1.jpg" alt="Property 1">
-        <h3>Modern Apartment</h3>
-        <p>$500,000</p>
-      </div>
+    <div class="property-gallery" id="property-gallery">
     </div>
+  </div>
 
-    <footer>
-      <p>&copy; 2024 Rentiku Search. All rights reserved.</p>
-    </footer>
+  <footer>
+    <p>&copy; 2024 Rentiku Search. All rights reserved.</p>
+  </footer>
 </body>
 
 </html>
