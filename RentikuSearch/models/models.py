@@ -31,12 +31,12 @@ class Property(BaseModel, Base):
     action: Mapped[Actions] = mapped_column(
         Enum(*actions, name="action"), nullable=True
     )
-    price: Mapped[float] = mapped_column(Float, nullable=True)
-    rent: Mapped[float] = mapped_column(Float, nullable=True)
-    num_rooms: Mapped[int] = mapped_column(Integer, nullable=True)
+    price: Mapped[float] = mapped_column(Float, default=0.0)
+    rent: Mapped[float] = mapped_column(Float, default=0.0)
+    num_rooms: Mapped[int] = mapped_column(Integer, default=0)
     address: Mapped[str] = mapped_column(String(100), nullable=True)
     latitude: Mapped[str] = mapped_column(String(50), nullable=True)
     longitude: Mapped[str] = mapped_column(String(50), nullable=True)
     region: Mapped[str] = mapped_column(String(100), nullable=True)
-    image_url: Mapped[int] = mapped_column(String(255), nullable=True)
+    image_url: Mapped[str] = mapped_column(String(255), nullable=True)
     owner_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
