@@ -1,5 +1,8 @@
 #!/usr/bin/bash
 
+HERE="$(dirname "$(readlink -fn "$0")")"
+DEV_SCRIPT="$HERE/setup_db_dev.sql"
+TEST_SCRIPT="$HERE/setup_db_test.sql"
 # check if psql is installed
 if [[ ! -x "$(command -v psql)" ]]; then
   echo "Error: psql is not installed." >&2
@@ -13,12 +16,12 @@ if [[ -z "$choice" ]]; then
   exit 1;
 fi
 
-if [[ "$choice" == "dev" ]]
-  psql -Ublackbeing -hdb -drentikusearchdb_dev -f ./setup_db_dev.sql
+if [[ "$choice" == "dev" ]]; then
+  psql -Ublackbeing -hdb postgres -f "$DEV_SCRIPT"
   exit 0;
 fi
-if [[ "$choice" == "test" ]]
-  psql -Ublackbeing -hdb -drentikusearchdb_test -f ./setup_db_test.sql
+if [[ "$choice" == "test" ]]; then
+  psql -Ublackbeing -hdb postgres -f "$TEST_SCRIPT"
   exit 0;
 fi
 ;
