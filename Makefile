@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
 
-PY_SRC := RentikuSearch/ tests/
+PY_SRC := RentikuSearch/ tests/ utils/
 
 .PHONY: help
 help:  ## Print this help.
@@ -33,4 +33,4 @@ check-types: ## Check types
 
 .PHONY: tests
 tests:
-	python -m pytest tests
+	FLASK_ENV=testing python -m pytest tests

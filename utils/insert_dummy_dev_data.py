@@ -13,26 +13,26 @@ db.reload()
 db.init_db()
 
 
-def load_data(file_path, model_class):
+def load_data(file_path):
     with file_path.open() as fd:
         data = json.load(fd)
-        class_name = model_class.__name__.lower()
-        class_plural = (
-            class_name[:-1] + "ies"
-            if class_name.endswith("y")
-            else class_name + "s"
-        )
+        properties = data.get("properties", {})
+        users = data.get("users", {})
 
-        items = data.get(class_plural, {})
-        for item_dict in items:
-            item_dict.pop("id")
-            item = model_class(**item_dict)
-            db.new(item)
-            db.save()
+        for user_dict in users:
+            user_dict.pop("id")
+            user = User(**user_dict)
+            db.new(user)
+
+        db.save()
+
+        for property_dict in properties:
+            property_dict.pop("id")
+            property = Property(**property_dict)
+            db.new(property)
+        db.save()
 
 
-user_json_file = base_path / "users.json"
-property_json_file = base_path / "property.json"
+db_json_file = base_path / "db.json"
 
-load_data(user_json_file, User)
-load_data(property_json_file, Property)
+load_data(db_json_file)
