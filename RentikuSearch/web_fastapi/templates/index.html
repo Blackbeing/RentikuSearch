@@ -1,15 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block head %}
   <title>Rentiku Search</title>
-  <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
-  <script src="{{ url_for('static', path='scripts/index.js') }}" defer=""></script>
-</head>
+  <link rel="stylesheet" href="{{ url_for('static', path='/styles.css') }}">
+{% endblock %}
 
-<body>
+{% block content %}
+
   <header>
     <nav class="navbar">
       <div class="logo">
@@ -30,12 +27,19 @@
   </header>
   <div class="property-section">
     <div class="property-gallery" id="property-gallery">
+    {% for property in properties %}
+      <div class="property-item">
+      <img src="{{ property.imageUrl }}" alt="">
+      <h3>{{ property.title}}</h3>
+      <p>${{ property.price }}</p>
+      </div>
+    {% endfor %}
+
     </div>
   </div>
 
   <footer>
     <p>&copy; 2024 Rentiku Search. All rights reserved.</p>
   </footer>
-</body>
 
-</html>
+{% endblock %}

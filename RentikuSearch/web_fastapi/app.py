@@ -1,7 +1,7 @@
-from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse
+from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
+
+from RentikuSearch.web_fastapi.views import index
 
 app = FastAPI()
 
@@ -10,9 +10,5 @@ app.mount(
     StaticFiles(directory="RentikuSearch/web_fastapi/static"),
     name="static",
 )
-templates = Jinja2Templates(directory="RentikuSearch/web_fastapi/templates")
 
-
-@app.get("/", response_class=HTMLResponse)
-async def index(request: Request):
-    return templates.TemplateResponse(request=request, name="index.html")
+app.include_router(index.router)
