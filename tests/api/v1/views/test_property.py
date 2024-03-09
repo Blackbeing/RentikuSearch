@@ -17,7 +17,7 @@ class TestPropertyEndpoint(unittest.TestCase):
         data = {
             "username": "Anderson",
             "email": "anderson@email",
-            "password_hash": "password",
+            "password": "password",
         }
         response = self.app.post("/api/v1/user", json=data)
         data = {

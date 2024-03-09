@@ -15,7 +15,7 @@ class TestUserEndpoint(unittest.TestCase):
         data = {
             "username": "John",
             "email": "John@email",
-            "password_hash": "password",
+            "password": "password",
         }
         response = self.app.post("/api/v1/user", json=data)
         self.assertEqual(response.status_code, 201)

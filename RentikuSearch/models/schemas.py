@@ -33,7 +33,7 @@ class UserBase(BaseModel):
 
 
 class UserCreate(UserBase):
-    password_hash: str
+    password: str
 
 
 class User(UserBase):

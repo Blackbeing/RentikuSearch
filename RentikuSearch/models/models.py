@@ -17,7 +17,7 @@ class User(BaseModel, Base):
         String(50), nullable=False, unique=True
     )
     email: Mapped[str] = mapped_column(String(255), unique=True)
-    password_hash: Mapped[str] = mapped_column(String(255), nullable=False)
+    password: Mapped[str] = mapped_column(String(255), nullable=False)
 
     def __repr__(self):
         return "username: {}  email: {}".format(self.username, self.email)

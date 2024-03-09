@@ -97,7 +97,7 @@ class RentikuSearchCMD(cmd2.Cmd):
         user = User(
             username=arg.username,
             email=arg.email,
-            password_hash=arg.password,
+            password=arg.password,
         )
         user.save()
 
