@@ -3,16 +3,16 @@ from pydantic import BaseModel
 
 class PropertyBase(BaseModel):
     title: str
-    description: str
-    action: str
+    description: str | None
+    action: str | None
     price: float
     rent: float
     num_rooms: int
-    address: str
-    latitude: str
-    longitude: str
-    region: str
-    image_url: str
+    address: str | None
+    latitude: str | None
+    longitude: str | None
+    region: str | None
+    image_url: str | None
 
 
 class PropertyCreate(PropertyBase):

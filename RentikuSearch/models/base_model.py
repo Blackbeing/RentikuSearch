@@ -1,11 +1,4 @@
-import RentikuSearch.models as models
-
-
 class BaseModel:
-
-    def save(self):
-        models.storage.new(self)
-        models.storage.save()
 
     def to_dict(self):
         new_dict = self.__dict__.copy()

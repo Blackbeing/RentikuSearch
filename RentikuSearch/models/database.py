@@ -37,11 +37,11 @@ class Database:
 
     @property
     def session(self):
-        return self.__session_factory()
+        return self.__session_factory
 
     @property
     def engine(self):
-        return self.__engine
+        return self.__engine()
 
     def init_db(self):
         Base.metadata.create_all(self.__engine)
