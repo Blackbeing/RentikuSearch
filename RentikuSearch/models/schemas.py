@@ -15,8 +15,8 @@ class PropertyBase(BaseModel):
     image_url: str
 
 
-class propertyCreate(PropertyBase):
-    pass
+class PropertyCreate(PropertyBase):
+    owner_id: int
 
 
 class Property(PropertyBase):
