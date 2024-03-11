@@ -13,6 +13,7 @@ class Base(BaseSettings):
     DB_NAME: str
     DB_USERNAME: str
     DB_DRIVERNAME: str = "postgresql+psycopg2"
+    ALGORITHM: str = "HS256"
 
     class Config:
         env_file = "RentikuSearch/.env"

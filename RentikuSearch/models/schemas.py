@@ -29,15 +29,24 @@ class Property(PropertyBase):
 
 class UserBase(BaseModel):
     username: str
-    email: str
 
 
 class UserCreate(UserBase):
     password: str
+    email: str
 
 
 class User(UserBase):
     id: int
+    email: str
 
     class Config:
         from_attributes = True
+
+
+class UserLogin(UserBase):
+    password: str
+
+
+class Token(BaseModel):
+    access_token: str

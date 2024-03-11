@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
+from RentikuSearch import dependancies as dp
 from RentikuSearch.models import crud, schemas
 from RentikuSearch.models.database import get_db
 
@@ -30,3 +31,11 @@ def get_user_by_id(id: int, db: Session = Depends(get_db)):
     if db_user is None:
         raise HTTPException(status_code=404, detail="User not found")
     return db_user
+
+
+@router.post("/user/login")
+async def login_user(
+    form_data: schemas.UserLogin, db: Session = Depends(get_db)
+):
+    token = await dp.login_for_access_token(db=db, form_data=form_data)
+    return token
