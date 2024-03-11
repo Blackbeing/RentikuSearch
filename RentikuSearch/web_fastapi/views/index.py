@@ -13,6 +13,5 @@ templates = Jinja2Templates(directory="RentikuSearch/web_fastapi/templates")
 @router.get("/")
 def index(request: Request, db: Session = Depends(get_db)):
     properties = db.query(Property).all()
-    return templates.TemplateResponse(
-        "index.html", {"request": request, "properties": properties}
-    )
+    context = {"request": request, "properties": properties}
+    return templates.TemplateResponse("index.html", context=context)

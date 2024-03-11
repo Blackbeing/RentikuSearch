@@ -1,17 +1,11 @@
-from passlib.context import CryptContext
 from sqlalchemy.orm import Session
 
+from RentikuSearch import dependancies as dp
 from RentikuSearch.models import models, schemas
-
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
-
-def hash_pwd(password: str) -> str:
-    return pwd_context.hash(password)
 
 
 def create_user(db: Session, user: schemas.UserCreate):
-    hashed_pwd = hash_pwd(user.password)
+    hashed_pwd = dp.hash_password(user.password)
     db_user = models.User(
         email=user.email, username=user.username, password=hashed_pwd
     )
