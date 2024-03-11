@@ -33,4 +33,4 @@ check-types: ## Check types
 
 .PHONY: tests
 tests:
-	FLASK_ENV=testing python -m pytest tests
+	python -m pytest tests
