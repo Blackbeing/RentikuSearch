@@ -1,9 +1,10 @@
 from sqlalchemy import create_engine
 # create url from env
 from sqlalchemy.engine import URL
-from sqlalchemy.orm import declarative_base, sessionmaker
+from sqlalchemy.orm import sessionmaker
 
 from RentikuSearch.config import settings
+from RentikuSearch.models.models import Base
 
 
 class Database:
@@ -37,11 +38,11 @@ class Database:
 
     @property
     def session(self):
-        return self.__session_factory
+        return self.__session_factory()
 
     @property
     def engine(self):
-        return self.__engine()
+        return self.__engine
 
     def init_db(self):
         Base.metadata.create_all(self.__engine)
@@ -49,12 +50,15 @@ class Database:
     def drop_tables(self):
         Base.metadata.drop_all(self.__engine)
 
+    def disconnect(self):
+        self.__session.close()
 
-Base = declarative_base()
+
+db_cls = Database()
 
 
 def get_db():
-    db = Database().session
+    db = db_cls.session
     try:
         yield db
     finally:

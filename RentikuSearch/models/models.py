@@ -1,11 +1,11 @@
 from typing import Literal
 
 from sqlalchemy import Enum, Float, ForeignKey, Integer, String, Text
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, declarative_base, mapped_column
 
 from RentikuSearch.models.base_model import BaseModel
-from RentikuSearch.models.database import Base
 
+Base = declarative_base()
 actions = ["rent", "sell", "lease"]
 Actions = Literal["rent", "sell", "lease"]
 
