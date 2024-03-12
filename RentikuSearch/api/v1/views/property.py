@@ -32,3 +32,22 @@ def get_property_by_id(id: int, db: Session = Depends(get_db)):
     if db_property is None:
         raise HTTPException(status_code=400, detail="Property does not exist")
     return crud.get_property_by_id(db=db, id=id)
+
+
+@router.put("/property/{id}", response_model=schemas.Property)
+def update_property(
+    id: int,
+    update_data: schemas.PropertyUpdate,
+    db: Session = Depends(get_db),
+):
+    db_property = crud.get_property_by_id(db=db, id=id)
+    if not db_property:
+        raise HTTPException(status_code=404, detail="Property not found")
+    return crud.update_property(
+        db=db, property=db_property, update_data=update_data
+    )
+
+
+@router.delete("/property/{id}")
+def delete_property(id: int, db: Session = Depends(get_db)):
+    crud.delete_property_by_id(db=db, id=id)

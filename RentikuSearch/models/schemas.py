@@ -19,6 +19,23 @@ class PropertyCreate(PropertyBase):
     owner_id: int
 
 
+class PropertyUpdate(BaseModel):
+    title: str = None
+    description: str | None = None
+    action: str | None = None
+    price: float = None
+    rent: float = None
+    num_rooms: int = None
+    address: str | None = None
+    latitude: str | None = None
+    longitude: str | None = None
+    region: str | None = None
+    image_url: str | None = None
+
+    class Config:
+        from_attributes = True
+
+
 class Property(PropertyBase):
     id: int
     owner_id: int
@@ -45,6 +62,10 @@ class User(UserBase):
 
 
 class UserLogin(UserBase):
+    password: str
+
+
+class UserUpdate(BaseModel):
     password: str
 
 

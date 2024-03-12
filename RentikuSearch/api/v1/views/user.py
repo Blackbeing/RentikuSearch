@@ -39,3 +39,24 @@ async def login_user(
 ):
     token = await dp.login_for_access_token(db=db, form_data=form_data)
     return token
+
+
+@router.put("/user/{id}", response_model=schemas.User)
+def update_user(
+    id: int, update_data: schemas.UserUpdate, db: Session = Depends(get_db)
+):
+    db_user = crud.get_user_by_id(db=db, id=id)
+    if not db_user:
+        raise HTTPException(status_code=404, detail="User not found")
+    if not update_data.password:
+        raise HTTPException(status_code=400, detail="Password is required")
+    return crud.update_user(db=db, user=db_user, update_data=update_data)
+
+
+@router.delete("/user/{id}")
+def delete_user(id: int, db: Session = Depends(get_db)):
+    # TODO backrefs to orphan property when user is deleted
+    user = crud.get_user_by_id(db=db, id=id)
+    if user:
+        db.delete(user)
+        db.commit()
