@@ -11,7 +11,6 @@ from RentikuSearch.config import settings
 from RentikuSearch.models import crud, schemas
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-# oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 
 def hash_password(password: str) -> str:
