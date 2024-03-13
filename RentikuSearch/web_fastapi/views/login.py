@@ -6,7 +6,7 @@ from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 
 from RentikuSearch import dependancies as dp
-from RentikuSearch.models import crud
+from RentikuSearch.models import crud, models
 from RentikuSearch.models.database import get_db
 
 router = APIRouter()
@@ -50,10 +50,11 @@ async def login_post(
                 token = dp.create_access_token(
                     data={"sub": form_data.username}
                 )
-                print(token)
+                properties = db.query(models.Property).all()
+                context = {"request": request, "properties": properties}
                 response = templates.TemplateResponse(
-                    "login.html",
-                    {"request": request, "msg": "Login Successfully"},
+                    "index.html",
+                    context=context,
                 )
                 response.set_cookie(
                     key="access_token",
