@@ -1,12 +1,13 @@
 from typing import Annotated
 
 from fastapi import APIRouter, Depends, Request, Response
+from fastapi.responses import RedirectResponse
 from fastapi.security import OAuth2PasswordRequestForm
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 
 from RentikuSearch import dependancies as dp
-from RentikuSearch.models import crud, models
+from RentikuSearch.models import crud
 from RentikuSearch.models.database import get_db
 
 router = APIRouter()
@@ -50,18 +51,12 @@ async def login_post(
                 token = dp.create_access_token(
                     data={"sub": form_data.username}
                 )
-                properties = db.query(models.Property).all()
-                context = {"request": request, "properties": properties}
-                response = templates.TemplateResponse(
-                    "index.html",
-                    context=context,
-                )
+                response = RedirectResponse("/", status_code=302)
                 response.set_cookie(
                     key="access_token",
                     value="Bearer {}".format(token),
                     httponly=True,
                 )
-                # response = templates.TemplateResponse("index.html", {"request": Request, "msg": "Login Successfully"})
                 return response
     except Exception as e:
         errors.append("Something went wrong\n\t {}\n\n".format(e))

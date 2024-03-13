@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
-from RentikuSearch.web_fastapi.views import index, login
+from RentikuSearch.web_fastapi.views import index, login, property
 
 app = FastAPI()
 
@@ -13,3 +13,4 @@ app.mount(
 
 app.include_router(index.router)
 app.include_router(login.router)
+app.include_router(property.router)

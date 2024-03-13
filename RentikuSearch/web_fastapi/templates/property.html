@@ -6,14 +6,7 @@
 {% endblock %}
 
 {% block content %}
-
 {% include "header.html" %}
-  <div class="messages">
-      {% if msg %}
-        <div class="alert alert-success" role="alert">
-          {{ msg }}
-      {% endif %}
-  </div>
   <div class="property-section">
     <div class="property-gallery" id="property-gallery">
     {% for property in properties %}
@@ -23,6 +16,7 @@
       <p>${{ property.price }}</p>
       </div>
     {% endfor %}
+
     </div>
   </div>
 
