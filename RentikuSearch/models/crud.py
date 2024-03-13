@@ -42,7 +42,7 @@ def update_user(
 
 
 def delete_user_by_id(db: Session, id: int):
-    user = get_user_by_id(id=id)
+    user = get_user_by_id(db=db, id=id)
     if user:
         db.delete(user)
         db.commit()
