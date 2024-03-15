@@ -78,9 +78,58 @@ header nav a:hover {
   background-color: #333;
 }
 
-/* Footer */
+
+.features {
+  padding: 2rem;
+  text-align: center;
+}
+
+.features h2 {
+  margin-bottom: 2rem;
+}
+
+.feature {
+  display: flex;
+  flex-direction: center; /* Changed to column layout */
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.feature img {
+  width: 300px; /* Adjust width and height as needed */
+  height: 300px; /* Adjust width and height as needed */
+  margin-bottom: 1rem;
+}
+
+.feature h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.features p {
+  text-align: justify;
+}
+
 footer {
   text-align: center;
   padding: 1rem;
   background-color: #eee;
 }
+
+
+
+/* /* Features Section */ */
+/* .features { */
+/*   padding: 2rem; */
+/*   text-align: center; */
+/* } */
+/**/
+/* .features h2 { */
+/*   margin-bottom: 2 */
+/**/
+/* .feature img { */
+/*   width: 100px; /* Adjust width and height as needed */ */
+/*   height: 100px; /* Adjust width and height as needed */ */
+/*   margin-right: 1rem; */
+/* } */
+/**/
+/* Footer */
