@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block head  %}
+    <title>Rentikusearch Login</title>
+    <link href="{{ url_for('static', path='/styles/about.css') }}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+  {% include "header.html" %}
+  <main>
+    <section class="intro">
+      <img src="{{ url_for('static', path='/images/Landing_Page_img.jpeg') }}" alt="Project Cover Image">
+      <h1>Rentiku Search</h1>
+      <p>Simplifying your property journey by seamlessly connecting you to perfect homes and commercial spaces.</p>
+      <a href="https://yourapplication.com" target="_blank" class="cta-button">View Project</a>
+    </section>
+
+    </main>
+
+{%  endblock %}
