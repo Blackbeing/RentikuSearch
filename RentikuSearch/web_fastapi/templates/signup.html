@@ -1,0 +1,39 @@
+{% extends "base.html" %} 
+
+{% block head  %}
+    <title>Rentikusearch Signup</title>
+    <link href="{{ url_for('static', path='/styles/styles.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', path='/styles/signup.css') }}" rel="stylesheet">
+{% endblock %}
+ 
+{% block content %}
+{% include "header.html" %}
+    <div class="signup-container">
+        {% if msg %}
+          <div class="alert alert-success" role="alert">
+            {{ msg }}
+          </div>
+        {% endif %}
+        {% for error in errors %}
+          <div class="alert alert-danger" role="alert">
+            {{ error }}
+          </div>
+        {% endfor %}
+        <h2>Rentikusearch Signup</h2>
+        <form class="login-form" action="/signup" method="post">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" class="login-btn">Sign up</button>
+        </form>
+    </div>
+{% endblock %}
