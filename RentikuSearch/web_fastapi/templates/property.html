@@ -11,9 +11,9 @@
     <div class="property-gallery" id="property-gallery">
     {% for property in properties %}
       <div class="property-item">
-      <img src="{{ property.imageUrl }}" alt="">
-      <h3>{{ property.title}}</h3>
-      <p>${{ property.price }}</p>
+        <img src="{{ url_for('static', path=property.image_url )}}" alt="">
+        <h3>{{ property.title}}</h3>
+        <p>${{ property.price }}</p>
       </div>
     {% endfor %}
 
