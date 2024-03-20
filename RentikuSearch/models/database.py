@@ -32,6 +32,8 @@ class Database:
         self.__session_factory = sessionmaker(
             autocommit=False, autoflush=False, bind=self.__engine
         )
+        self.init_db()
+
         if settings.TESTING:
             self.drop_tables()
             self.init_db()
