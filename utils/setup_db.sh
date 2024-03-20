@@ -17,7 +17,7 @@ if [[ -z "$choice" ]]; then
 fi
  
 if [[ "$choice" == "dev" ]]; then
-  PGPASSWORD=password psql -Ublackbeing -hdb postgres -f "$DEV_SCRIPT"
+  PGPASSWORD=password psql -Ublackbeing -hrentiku_db postgres -f "$DEV_SCRIPT"
   # get parent directory
   cd "$(dirname $HERE)"
   alembic upgrade head
@@ -25,7 +25,7 @@ if [[ "$choice" == "dev" ]]; then
   exit 0;
 fi
 if [[ "$choice" == "test" ]]; then
-  PGPASSWORD=password psql -Ublackbeing -hdb postgres -f "$TEST_SCRIPT"
+  PGPASSWORD=password psql -Ublackbeing -hrentiku_db postgres -f "$TEST_SCRIPT"
   cd "$(dirname $HERE)"
   alembic upgrade head
   cd -
