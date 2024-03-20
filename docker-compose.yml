@@ -1,0 +1,29 @@
+version: '3'
+services:
+  sandbox:
+    build:
+      context: .
+      dockerfile: RentikuSearch.Dockerfile
+    container_name: "RentikuSearch_deploy_ws"
+    privileged: true
+    ports:
+      - "8000:80"
+      - "5050:5050"
+    depends_on:
+      - db
+ 
+  db:
+    build:
+      context: .
+      dockerfile: Postgresql.Dockerfile
+    container_name: "rentikusearch_deploy_db"
+    restart: always
+    privileged: true
+    tty: true
+    environment:
+      POSTGRES_PASSWORD: 'password'
+      POSTGRES_USER: 'blackbeing'
+      POSTGRES_DB: 'RentikuSearch'
+ 
+ 
+ 
