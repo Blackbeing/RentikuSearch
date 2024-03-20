@@ -1,10 +1,25 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages]
+find = {}
+
 [project]
 name = "RentikuSearch"
-dynamic = ["version"]
-description = "Default template for PDM package"
+description = "Seamless search for dream property"
 authors = [
-    {name = "Blackbeing", email = "johnjahi55@gmail.com"},
+    {name = "Anderson John Njahi", email = "johnjahi55@gmail.com"},
 ]
+dynamic = ["version"]
+
+requires-python = "==3.10.*"
+license = {text = "MIT"}
+classifiers = [
+    "Framework :: fastapi",
+    "Programming Language :: Python :: 3",
+]
+
 dependencies = [
     "cmd2>=2.4.3",
     "fastapi[all]>=0.110.0",
@@ -17,19 +32,8 @@ dependencies = [
     "pydantic-settings>=2.2.1",
     "uvicorn>=0.28.0",
 ]
-requires-python = "==3.10.*"
-readme = "README.md"
-license = {text = "MIT"}
-version = "0.1.0"
 
-[tool.pdm]
-distribution = false
-version = {source = "scm"}
-plugins = [
-  "pdm-multirun"
-]
-
-[tool.pdm.dev-dependencies]
+[project.optional-dependencies]
 dev = [
     "alembic>=1.13.1",
     "autoflake>=2.3.0",
@@ -40,3 +44,5 @@ dev = [
     "faker>=24.2.0",
 ]
 
+
+[tool.setuptools_scm]
