@@ -31,11 +31,13 @@ dependencies = [
     "python-multipart>=0.0.9",
     "pydantic-settings>=2.2.1",
     "uvicorn>=0.28.0",
+    "alembic>=1.13.1",
+    "passlib==1.7.4",
+    "python-jose==3.3.0"
 ]
 
 [project.optional-dependencies]
 dev = [
-    "alembic>=1.13.1",
     "autoflake>=2.3.0",
     "black>=24.2.0",
     "isort>=5.13.2",
