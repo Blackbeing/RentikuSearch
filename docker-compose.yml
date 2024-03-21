@@ -7,10 +7,11 @@ services:
     container_name: "RentikuSearch_deploy_ws"
     privileged: true
     ports:
-      - "8000:80"
+      - "127.0.0.1:8000:80"
       - "5050:5050"
     depends_on:
-      - rentiku_db
+      rentiku_db:
+        condition: service_healthy
  
   rentiku_db:
     build:
@@ -25,5 +26,10 @@ services:
       POSTGRES_USER: 'blackbeing'
       POSTGRES_DB: 'RentikuSearch'
  
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "rsuser_dev", "-d", "rentikusearchdb_dev"]
+      interval: 10s  # Check every 10 seconds
+      timeout: 5s   # Wait up to 5 seconds for response
+      retries: 5    # Retry up to 5 times before marking unhealthy
  
  

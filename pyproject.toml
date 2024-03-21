@@ -11,7 +11,8 @@ description = "Seamless search for dream property"
 authors = [
     {name = "Anderson John Njahi", email = "johnjahi55@gmail.com"},
 ]
-dynamic = ["version"]
+# dynamic = ["version"]
+version = '0.0.1'
 
 requires-python = "==3.10.*"
 license = {text = "MIT"}
@@ -47,4 +48,4 @@ dev = [
 ]
 
 
-[tool.setuptools_scm]
+# [tool.setuptools_scm]
