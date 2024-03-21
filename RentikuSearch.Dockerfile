@@ -10,5 +10,4 @@ RUN  apt-get update -y && apt-get install postgresql-client -y
 
 COPY . .
 
-CMD ["python", "manage.py", "api", "--host", "0.0.0.0", "--port", "5050"]
-CMD ["python", "manage.py", "web", "--host", "0.0.0.0", "--port", "80"]
+CMD ["bash", "run_services.sh"]
